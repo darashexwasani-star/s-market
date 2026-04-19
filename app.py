@@ -4,6 +4,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+# ئەمە وەک بنکەی زانیاری کاتی کار دەکات
 all_posts = []
 
 HTML_TEMPLATE = r"""
@@ -31,6 +32,7 @@ HTML_TEMPLATE = r"""
         .cat-chip { padding: 10px 22px; border-radius: 15px; background: white; color: #64748b; font-weight: 900; border: 1px solid #e2e8f0; transition: 0.3s; white-space: nowrap; }
         .cat-chip.active { background: #1e40af; color: white; border-color: #1e40af; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
+        
         .swiper { width: 100%; height: 320px; }
         .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
         .swiper-pagination-bullet { background: #fff !important; opacity: 0.7; }
@@ -38,6 +40,7 @@ HTML_TEMPLATE = r"""
     </style>
 </head>
 <body>
+
     <div class="ocean-layer">
         <div class="relative z-[60] p-6">
             <div class="flex justify-between items-center mb-6">
@@ -52,6 +55,7 @@ HTML_TEMPLATE = r"""
                 <button onclick="toggleModal(true)" id="ui-add-btn" class="bg-white text-blue-900 px-6 py-4 rounded-2xl text-[12px] font-black shadow-2xl active:scale-95 transition-all"></button>
             </div>
         </div>
+
         <svg class="waves-container" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
             <defs><path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" /></defs>
             <g class="parallax">
@@ -59,13 +63,16 @@ HTML_TEMPLATE = r"""
             </g>
         </svg>
     </div>
+
     <div id="catList" class="flex gap-3 overflow-x-auto no-scrollbar px-6 py-8"></div>
     <main class="px-6 pb-32"><div id="grid" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div></main>
+
     <div id="modal" class="fixed inset-0 bg-black/30 hidden items-center justify-center p-6 z-[100] backdrop-blur-sm">
         <div class="glass-modal w-full max-w-sm p-8 max-h-[90vh] overflow-y-auto shadow-2xl">
             <h2 id="ui-title" class="text-2xl font-black mb-8 text-slate-800 text-center"></h2>
             <div class="space-y-4">
                 <select id="pCat" class="w-full p-4 bg-slate-50 rounded-xl font-bold outline-none border border-slate-100"></select>
+                
                 <div class="grid grid-cols-3 gap-2">
                     <div onclick="document.getElementById('fInp1').click()" class="h-24 bg-slate-50 rounded-xl border-2 border-dashed flex items-center justify-center cursor-pointer overflow-hidden">
                         <img id="pImg1" class="w-full h-full object-cover hidden">
@@ -80,9 +87,11 @@ HTML_TEMPLATE = r"""
                         <span id="pTxt3" class="text-[10px] text-slate-400 font-bold">وێنە ٣</span>
                     </div>
                 </div>
+
                 <input type="file" id="fInp1" class="hidden" accept="image/*" onchange="handleImg(event, 1)">
                 <input type="file" id="fInp2" class="hidden" accept="image/*" onchange="handleImg(event, 2)">
                 <input type="file" id="fInp3" class="hidden" accept="image/*" onchange="handleImg(event, 3)">
+
                 <input type="text" id="pName" class="w-full p-4 bg-slate-50 rounded-xl outline-none font-bold text-sm">
                 <input type="number" id="pPrice" class="w-full p-4 bg-slate-50 rounded-xl outline-none font-black text-blue-700">
                 <input type="tel" id="pPhone" class="w-full p-4 bg-slate-50 rounded-xl outline-none font-bold text-sm">
@@ -91,6 +100,7 @@ HTML_TEMPLATE = r"""
             </div>
         </div>
     </div>
+
     <div id="confirmModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-6 z-[200]">
         <div class="bg-white w-full max-w-xs rounded-2xl p-8 text-center shadow-2xl">
             <h3 id="ui-conf-title" class="text-xl font-black text-slate-800 mb-2"></h3>
@@ -101,6 +111,7 @@ HTML_TEMPLATE = r"""
             </div>
         </div>
     </div>
+
     <div id="detailModal" class="fixed inset-0 bg-white hidden z-[150] flex-col overflow-hidden">
         <div id="detailContent" class="flex-1 overflow-y-auto">
              <div class="swiper mySwiper">
@@ -115,13 +126,16 @@ HTML_TEMPLATE = r"""
             <button onclick="closeDetails()" id="ui-back" class="w-full text-slate-400 font-bold text-xs text-center"></button>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         let lang = 'sorani'; let cat = 'هەمووی'; 
         let currentImgs = ["", "", ""];
         let swiperInstance = null;
+
         const myId = localStorage.getItem('user_id') || ('u' + Date.now());
         localStorage.setItem('user_id', myId);
+
         const dict = {
             sorani: { 
                 add: "بڵاوکردنەوە +", search: "بگەڕێ بۆ کاڵاکان...", title: "بڵاوکردنەوەی نوێ", 
@@ -140,12 +154,14 @@ HTML_TEMPLATE = r"""
                 call: "پەیوەندیێ بکە", cats: ["هەمی", "ترومبێل", "مۆبایل", "خانی", "هەمەجۆر"] 
             }
         };
+
         function setLanguage(l) {
             lang = l;
             document.getElementById('btn-sorani').className = `px-4 py-1.5 rounded-xl text-[11px] font-bold ${l === 'sorani' ? 'bg-white text-blue-900 shadow-sm' : 'text-white/40'}`;
             document.getElementById('btn-badini').className = `px-4 py-1.5 rounded-xl text-[11px] font-bold ${l === 'badini' ? 'bg-white text-blue-900 shadow-sm' : 'text-white/40'}`;
             refreshUI(); renderData();
         }
+
         function refreshUI() {
             const d = dict[lang];
             document.getElementById('ui-add-btn').innerText = d.add;
@@ -172,7 +188,9 @@ HTML_TEMPLATE = r"""
                 sel.innerHTML += `<option value="${dict['sorani'].cats[i+1]}">${c}</option>`;
             });
         }
+
         function setCat(c) { cat = c; refreshUI(); renderData(); }
+
         function timeSince(ts) {
             const s = Math.floor((Date.now() - ts) / 1000);
             const d = dict[lang];
@@ -181,6 +199,7 @@ HTML_TEMPLATE = r"""
             if (s < 86400) return Math.floor(s/3600) + " " + d.hour;
             return Math.floor(s/86400) + " " + d.day;
         }
+
         async function renderData() {
             const grid = document.getElementById('grid');
             const q = document.getElementById('searchInp').value.toLowerCase();
@@ -201,17 +220,21 @@ HTML_TEMPLATE = r"""
                     </div>`;
             });
         }
+
         function showDetails(p) {
             const wrapper = document.getElementById('sliderWrapper');
             const imgs = p.imgs.filter(img => img !== "");
+            
             wrapper.innerHTML = imgs.map(img => `
                 <div class="swiper-slide"><img src="${img}" class="w-full h-full object-cover"></div>
             `).join("");
+
             document.getElementById('detailText').innerHTML = `
                 <h2 class="text-3xl font-black text-slate-900 mb-2">${p.name}</h2>
                 <p class="text-blue-600 font-black text-4xl mb-6">$${p.price}</p>
                 <div class="bg-slate-50 p-4 rounded-xl text-slate-500 font-bold text-xs inline-block">${timeSince(p.time)}</div>
             `;
+            
             document.getElementById('callBtn').href = "tel:" + p.phone;
             document.getElementById('callBtn').innerText = dict[lang].call;
             const delBtn = document.getElementById('delBtn');
@@ -221,16 +244,18 @@ HTML_TEMPLATE = r"""
             } else {
                 delBtn.classList.add('hidden');
             }
+            
             document.getElementById('detailModal').classList.replace('hidden', 'flex');
+
             if(swiperInstance) swiperInstance.destroy();
             swiperInstance = new Swiper(".mySwiper", {
                 pagination: { el: ".swiper-pagination", clickable: true },
                 autoplay: { delay: 7000, disableOnInteraction: false },
                 loop: imgs.length > 1,
-                grabCursor: true,
-                on: { touchEnd: function() { this.autoplay.start(); } }
+                grabCursor: true
             });
         }
+
         function openConfirm(postId) {
             document.getElementById('confirmModal').classList.replace('hidden', 'flex');
             document.getElementById('confirmYes').onclick = async () => {
@@ -239,7 +264,10 @@ HTML_TEMPLATE = r"""
             };
         }
         function closeConfirm() { document.getElementById('confirmModal').classList.replace('flex', 'hidden'); }
-        function closeDetails() { document.getElementById('detailModal').classList.replace('flex', 'hidden'); }
+        function closeDetails() { 
+            document.getElementById('detailModal').classList.replace('flex', 'hidden'); 
+        }
+
         function handleImg(e, num) {
             const reader = new FileReader();
             reader.onload = (v) => {
@@ -250,12 +278,15 @@ HTML_TEMPLATE = r"""
             };
             reader.readAsDataURL(e.target.files[0]);
         }
+
         async function submitPost() {
             const name = document.getElementById('pName').value;
             const price = document.getElementById('pPrice').value;
             const phone = document.getElementById('pPhone').value;
             const category = document.getElementById('pCat').value;
+            
             if(!currentImgs[0] || !name || !phone) return alert("تکایە وێنەی یەکەم و زانیارییەکان پڕ بکەرەوە");
+            
             const newPost = { 
                 id: Date.now(), 
                 time: Date.now(), 
@@ -266,6 +297,7 @@ HTML_TEMPLATE = r"""
                 imgs: currentImgs.filter(i => i !== ""), 
                 owner_id: myId 
             };
+            
             toggleModal(false);
             await fetch('/api/posts', { 
                 method: 'POST', 
@@ -274,6 +306,7 @@ HTML_TEMPLATE = r"""
             });
             renderData();
         }
+
         function toggleModal(s) { 
             document.getElementById('modal').classList.toggle('hidden', !s); 
             document.getElementById('modal').classList.toggle('flex', s);
@@ -295,10 +328,12 @@ HTML_TEMPLATE = r"""
 """
 
 @app.route('/')
-def index(): return render_template_string(HTML_TEMPLATE)
+def index():
+    return render_template_string(HTML_TEMPLATE)
 
 @app.route('/api/posts', methods=['GET'])
-def get_posts(): return jsonify(all_posts)
+def get_posts():
+    return jsonify(all_posts)
 
 @app.route('/api/posts', methods=['POST'])
 def add_post():
@@ -315,3 +350,6 @@ def delete_post(post_id):
         return jsonify({"status": "deleted"})
     return jsonify({"status": "unauthorized"}), 403
 
+# ئەم بەشەی خوارەوە گرنگە بۆ Vercel
+if __name__ == '__main__':
+    app.run(debug=True)
