@@ -1,0 +1,21 @@
+0 verbose cli /data/data/com.termux/files/usr/bin/node /data/data/com.termux/files/usr/lib/node_modules/npm/bin/npm-cli.js
+1 info using npm@11.12.1
+2 info using node@v25.8.2
+3 silly config load:file:/data/data/com.termux/files/usr/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/data/com.termux/files/home/.npmrc
+5 silly config load:file:/data/data/com.termux/files/usr/etc/npmrc
+6 verbose title npm exec localtunnel --port 8080
+7 verbose argv "exec" "--" "localtunnel" "--port" "8080"
+8 verbose logfile logs-max:10 dir:/data/data/com.termux/files/home/.npm/_logs/2026-04-15T16_25_24_143Z-
+9 verbose logfile /data/data/com.termux/files/home/.npm/_logs/2026-04-15T16_25_24_143Z-debug-0.log
+10 silly logfile start cleaning logs, removing 1 files
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:1174405120 maxSize:293601280 maxEntrySize:146800640
+13 http fetch GET 200 https://registry.npmjs.org/localtunnel 705ms (cache miss)
+14 silly packumentCache heap:1174405120 maxSize:293601280 maxEntrySize:146800640
+15 verbose cwd /data/data/com.termux/files/home
+16 verbose os Linux 6.1.115-android14-11-ga2521ca27699-ab13294383
+17 verbose node v25.8.2
+18 verbose npm  v11.12.1
+19 verbose exit 1
+20 verbose code 1

@@ -1,0 +1,367 @@
+0 verbose cli /data/data/com.termux/files/usr/bin/node /data/data/com.termux/files/usr/bin/npm
+1 info using npm@11.12.1
+2 info using node@v25.8.2
+3 silly config load:file:/data/data/com.termux/files/usr/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/data/com.termux/files/home/kurd_chat/.npmrc
+5 silly config load:file:/data/data/com.termux/files/home/.npmrc
+6 silly config load:file:/data/data/com.termux/files/usr/etc/npmrc
+7 verbose title npm install express socket.io bcryptjs multer nedb
+8 verbose argv "install" "express" "socket.io" "bcryptjs" "multer" "nedb"
+9 verbose logfile logs-max:10 dir:/data/data/com.termux/files/home/.npm/_logs/2026-04-03T03_14_26_792Z-
+10 verbose logfile /data/data/com.termux/files/home/.npm/_logs/2026-04-03T03_14_26_792Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:1174405120 maxSize:293601280 maxEntrySize:146800640
+13 silly logfile done cleaning log files
+14 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+15 silly idealTree buildDeps
+16 silly fetch manifest bcryptjs@^3.0.3
+17 silly packumentCache full:https://registry.npmjs.org/bcryptjs cache-miss
+18 http cache https://registry.npmjs.org/bcryptjs 65ms (cache hit)
+19 silly packumentCache full:https://registry.npmjs.org/bcryptjs set size:80409 disposed:false
+20 silly fetch manifest express@^5.2.1
+21 silly packumentCache full:https://registry.npmjs.org/express cache-miss
+22 http cache https://registry.npmjs.org/express 8ms (cache hit)
+23 silly packumentCache full:https://registry.npmjs.org/express set size:801257 disposed:false
+24 silly fetch manifest socket.io@^4.8.3
+25 silly packumentCache full:https://registry.npmjs.org/socket.io cache-miss
+26 http cache https://registry.npmjs.org/socket.io 4ms (cache hit)
+27 silly packumentCache full:https://registry.npmjs.org/socket.io set size:379231 disposed:false
+28 silly fetch manifest multer@*
+29 silly packumentCache full:https://registry.npmjs.org/multer cache-miss
+30 http fetch GET 200 https://registry.npmjs.org/multer 1152ms (cache revalidated)
+31 silly packumentCache full:https://registry.npmjs.org/multer set size:150932 disposed:false
+32 silly fetch manifest nedb@*
+33 silly packumentCache full:https://registry.npmjs.org/nedb cache-miss
+34 http fetch GET 200 https://registry.npmjs.org/nedb 343ms (cache miss)
+35 silly packumentCache full:https://registry.npmjs.org/nedb set size:undefined disposed:false
+36 silly placeDep ROOT bcryptjs@3.0.3 REPLACE for: kurd_chat@1.0.0 want: ^3.0.3
+37 silly placeDep ROOT express@5.2.1 REPLACE for: kurd_chat@1.0.0 want: ^5.2.1
+38 silly placeDep ROOT multer@2.1.1 OK for: kurd_chat@1.0.0 want: *
+39 silly placeDep ROOT nedb@1.8.0 OK for: kurd_chat@1.0.0 want: *
+40 silly placeDep ROOT socket.io@4.8.3 REPLACE for: kurd_chat@1.0.0 want: ^4.8.3
+41 silly fetch manifest append-field@^1.0.0
+42 silly packumentCache full:https://registry.npmjs.org/append-field cache-miss
+43 silly fetch manifest busboy@^1.6.0
+44 silly packumentCache full:https://registry.npmjs.org/busboy cache-miss
+45 silly fetch manifest concat-stream@^2.0.0
+46 silly packumentCache full:https://registry.npmjs.org/concat-stream cache-miss
+47 silly fetch manifest type-is@^1.6.18
+48 silly packumentCache full:https://registry.npmjs.org/type-is cache-miss
+49 silly fetch manifest async@0.2.10
+50 silly packumentCache full:https://registry.npmjs.org/async cache-miss
+51 silly fetch manifest mkdirp@~0.5.1
+52 silly packumentCache full:https://registry.npmjs.org/mkdirp cache-miss
+53 silly fetch manifest underscore@~1.4.4
+54 silly packumentCache full:https://registry.npmjs.org/underscore cache-miss
+55 http cache https://registry.npmjs.org/type-is 25ms (cache hit)
+56 silly packumentCache full:https://registry.npmjs.org/type-is set size:86196 disposed:false
+57 silly fetch manifest localforage@^1.3.0
+58 silly packumentCache full:https://registry.npmjs.org/localforage cache-miss
+59 http fetch GET 200 https://registry.npmjs.org/async 525ms (cache revalidated)
+60 silly packumentCache full:https://registry.npmjs.org/async set size:230496 disposed:false
+61 silly fetch manifest binary-search-tree@0.2.5
+62 silly packumentCache full:https://registry.npmjs.org/binary-search-tree cache-miss
+63 http fetch GET 200 https://registry.npmjs.org/busboy 689ms (cache revalidated)
+64 silly packumentCache full:https://registry.npmjs.org/busboy set size:78925 disposed:false
+65 http fetch GET 200 https://registry.npmjs.org/mkdirp 732ms (cache miss)
+66 silly packumentCache full:https://registry.npmjs.org/mkdirp set size:undefined disposed:false
+67 http fetch GET 200 https://registry.npmjs.org/localforage 710ms (cache miss)
+68 silly packumentCache full:https://registry.npmjs.org/localforage set size:undefined disposed:false
+69 http fetch GET 200 https://registry.npmjs.org/underscore 743ms (cache miss)
+70 silly packumentCache full:https://registry.npmjs.org/underscore set size:undefined disposed:false
+71 http fetch GET 200 https://registry.npmjs.org/binary-search-tree 337ms (cache miss)
+72 silly packumentCache full:https://registry.npmjs.org/binary-search-tree set size:undefined disposed:false
+73 http fetch GET 200 https://registry.npmjs.org/concat-stream 1066ms (cache revalidated)
+74 silly packumentCache full:https://registry.npmjs.org/concat-stream set size:63783 disposed:false
+75 http fetch GET 200 https://registry.npmjs.org/append-field 1084ms (cache revalidated)
+76 silly packumentCache full:https://registry.npmjs.org/append-field set size:7798 disposed:false
+77 silly placeDep ROOT append-field@1.0.0 OK for: multer@2.1.1 want: ^1.0.0
+78 silly placeDep ROOT busboy@1.6.0 OK for: multer@2.1.1 want: ^1.6.0
+79 silly placeDep ROOT concat-stream@2.0.0 OK for: multer@2.1.1 want: ^2.0.0
+80 silly placeDep node_modules/multer type-is@1.6.18 OK for: multer@2.1.1 want: ^1.6.18
+81 silly fetch manifest streamsearch@^1.1.0
+82 silly packumentCache full:https://registry.npmjs.org/streamsearch cache-miss
+83 silly fetch manifest buffer-from@^1.0.0
+84 silly packumentCache full:https://registry.npmjs.org/buffer-from cache-miss
+85 silly fetch manifest readable-stream@^3.0.2
+86 silly packumentCache full:https://registry.npmjs.org/readable-stream cache-miss
+87 silly fetch manifest typedarray@^0.0.6
+88 silly packumentCache full:https://registry.npmjs.org/typedarray cache-miss
+89 silly fetch manifest mime-types@~2.1.24
+90 silly packumentCache full:https://registry.npmjs.org/mime-types cache-miss
+91 silly fetch manifest media-typer@0.3.0
+92 silly packumentCache full:https://registry.npmjs.org/media-typer cache-miss
+93 http cache https://registry.npmjs.org/media-typer 21ms (cache hit)
+94 silly packumentCache full:https://registry.npmjs.org/media-typer set size:20873 disposed:false
+95 http cache https://registry.npmjs.org/mime-types 24ms (cache hit)
+96 silly packumentCache full:https://registry.npmjs.org/mime-types set size:139110 disposed:false
+97 http fetch GET 200 https://registry.npmjs.org/readable-stream 170ms (cache revalidated)
+98 silly packumentCache full:https://registry.npmjs.org/readable-stream set size:261096 disposed:false
+99 http fetch GET 200 https://registry.npmjs.org/buffer-from 195ms (cache revalidated)
+100 silly packumentCache full:https://registry.npmjs.org/buffer-from set size:15463 disposed:false
+101 http fetch GET 200 https://registry.npmjs.org/typedarray 378ms (cache revalidated)
+102 silly packumentCache full:https://registry.npmjs.org/typedarray set size:18469 disposed:false
+103 http fetch GET 200 https://registry.npmjs.org/streamsearch 740ms (cache revalidated)
+104 silly packumentCache full:https://registry.npmjs.org/streamsearch set size:27372 disposed:false
+105 silly placeDep ROOT streamsearch@1.1.0 OK for: busboy@1.6.0 want: ^1.1.0
+106 silly placeDep ROOT buffer-from@1.1.2 OK for: concat-stream@2.0.0 want: ^1.0.0
+107 silly placeDep ROOT readable-stream@3.6.2 OK for: concat-stream@2.0.0 want: ^3.0.2
+108 silly placeDep ROOT typedarray@0.0.6 OK for: concat-stream@2.0.0 want: ^0.0.6
+109 silly fetch manifest string_decoder@^1.1.1
+110 silly packumentCache full:https://registry.npmjs.org/string_decoder cache-miss
+111 silly fetch manifest util-deprecate@^1.0.1
+112 silly packumentCache full:https://registry.npmjs.org/util-deprecate cache-miss
+113 http fetch GET 200 https://registry.npmjs.org/string_decoder 113ms (cache revalidated)
+114 silly packumentCache full:https://registry.npmjs.org/string_decoder set size:28441 disposed:false
+115 http fetch GET 200 https://registry.npmjs.org/util-deprecate 115ms (cache revalidated)
+116 silly packumentCache full:https://registry.npmjs.org/util-deprecate set size:6674 disposed:false
+117 silly placeDep ROOT async@0.2.10 OK for: nedb@1.8.0 want: 0.2.10
+118 silly placeDep ROOT binary-search-tree@0.2.5 OK for: nedb@1.8.0 want: 0.2.5
+119 silly placeDep ROOT localforage@1.10.0 OK for: nedb@1.8.0 want: ^1.3.0
+120 silly placeDep ROOT mkdirp@0.5.6 OK for: nedb@1.8.0 want: ~0.5.1
+121 silly placeDep ROOT underscore@1.4.4 OK for: nedb@1.8.0 want: ~1.4.4
+122 silly fetch manifest lie@3.1.1
+123 silly packumentCache full:https://registry.npmjs.org/lie cache-miss
+124 silly fetch manifest minimist@^1.2.6
+125 silly packumentCache full:https://registry.npmjs.org/minimist cache-miss
+126 http fetch GET 200 https://registry.npmjs.org/minimist 132ms (cache revalidated)
+127 silly packumentCache full:https://registry.npmjs.org/minimist set size:77063 disposed:false
+128 http fetch GET 200 https://registry.npmjs.org/lie 319ms (cache miss)
+129 silly packumentCache full:https://registry.npmjs.org/lie set size:undefined disposed:false
+130 silly placeDep ROOT lie@3.1.1 OK for: localforage@1.10.0 want: 3.1.1
+131 silly fetch manifest immediate@~3.0.5
+132 silly packumentCache full:https://registry.npmjs.org/immediate cache-miss
+133 http fetch GET 200 https://registry.npmjs.org/immediate 139ms (cache miss)
+134 silly packumentCache full:https://registry.npmjs.org/immediate set size:undefined disposed:false
+135 silly placeDep ROOT immediate@3.0.6 OK for: lie@3.1.1 want: ~3.0.5
+136 silly placeDep ROOT minimist@1.2.8 OK for: mkdirp@0.5.6 want: ^1.2.6
+137 silly placeDep ROOT string_decoder@1.3.0 OK for: readable-stream@3.6.2 want: ^1.1.1
+138 silly placeDep ROOT util-deprecate@1.0.2 OK for: readable-stream@3.6.2 want: ^1.0.1
+139 silly fetch manifest safe-buffer@~5.2.0
+140 silly packumentCache full:https://registry.npmjs.org/safe-buffer cache-miss
+141 http fetch GET 200 https://registry.npmjs.org/safe-buffer 109ms (cache revalidated)
+142 silly packumentCache full:https://registry.npmjs.org/safe-buffer set size:41183 disposed:false
+143 silly placeDep ROOT safe-buffer@5.2.1 OK for: string_decoder@1.3.0 want: ~5.2.0
+144 silly placeDep node_modules/multer media-typer@0.3.0 OK for: type-is@1.6.18 want: 0.3.0
+145 silly placeDep node_modules/multer mime-types@2.1.35 OK for: type-is@1.6.18 want: ~2.1.24
+146 silly fetch manifest mime-db@1.52.0
+147 silly packumentCache full:https://registry.npmjs.org/mime-db cache-miss
+148 http cache https://registry.npmjs.org/mime-db 3ms (cache hit)
+149 silly packumentCache full:https://registry.npmjs.org/mime-db set size:164953 disposed:false
+150 silly placeDep node_modules/multer mime-db@1.52.0 OK for: mime-types@2.1.35 want: 1.52.0
+151 silly reify moves {}
+152 silly audit bulk request {
+152 silly audit   '@socket.io/component-emitter': [ '3.1.2' ],
+152 silly audit   '@types/cors': [ '2.8.19' ],
+152 silly audit   '@types/node': [ '25.5.0' ],
+152 silly audit   '@types/ws': [ '8.18.1' ],
+152 silly audit   accepts: [ '2.0.0', '1.3.8' ],
+152 silly audit   base64id: [ '2.0.0' ],
+152 silly audit   'body-parser': [ '2.2.2' ],
+152 silly audit   bytes: [ '3.1.2' ],
+152 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+152 silly audit   'call-bound': [ '1.0.4' ],
+152 silly audit   'content-disposition': [ '1.0.1' ],
+152 silly audit   'content-type': [ '1.0.5' ],
+152 silly audit   cookie: [ '0.7.2' ],
+152 silly audit   'cookie-signature': [ '1.2.2' ],
+152 silly audit   cors: [ '2.8.6' ],
+152 silly audit   debug: [ '4.4.3' ],
+152 silly audit   depd: [ '2.0.0' ],
+152 silly audit   'dunder-proto': [ '1.0.1' ],
+152 silly audit   'ee-first': [ '1.1.1' ],
+152 silly audit   encodeurl: [ '2.0.0' ],
+152 silly audit   'engine.io': [ '6.6.6' ],
+152 silly audit   'engine.io-parser': [ '5.2.3' ],
+152 silly audit   'mime-db': [ '1.52.0', '1.54.0' ],
+152 silly audit   'mime-types': [ '2.1.35', '3.0.2' ],
+152 silly audit   negotiator: [ '0.6.3', '1.0.0' ],
+152 silly audit   'es-define-property': [ '1.0.1' ],
+152 silly audit   'es-errors': [ '1.3.0' ],
+152 silly audit   'es-object-atoms': [ '1.1.1' ],
+152 silly audit   'escape-html': [ '1.0.3' ],
+152 silly audit   etag: [ '1.8.1' ],
+152 silly audit   finalhandler: [ '2.1.1' ],
+152 silly audit   forwarded: [ '0.2.0' ],
+152 silly audit   fresh: [ '2.0.0' ],
+152 silly audit   'function-bind': [ '1.1.2' ],
+152 silly audit   'get-intrinsic': [ '1.3.0' ],
+152 silly audit   'get-proto': [ '1.0.1' ],
+152 silly audit   gopd: [ '1.2.0' ],
+152 silly audit   'has-symbols': [ '1.1.0' ],
+152 silly audit   hasown: [ '2.0.2' ],
+152 silly audit   'http-errors': [ '2.0.1' ],
+152 silly audit   'iconv-lite': [ '0.7.2' ],
+152 silly audit   inherits: [ '2.0.4' ],
+152 silly audit   'ipaddr.js': [ '1.9.1' ],
+152 silly audit   'is-promise': [ '4.0.0' ],
+152 silly audit   'math-intrinsics': [ '1.1.0' ],
+152 silly audit   'media-typer': [ '1.1.0', '0.3.0' ],
+152 silly audit   'merge-descriptors': [ '2.0.0' ],
+152 silly audit   ms: [ '2.1.3' ],
+152 silly audit   'object-assign': [ '4.1.1' ],
+152 silly audit   'object-inspect': [ '1.13.4' ],
+152 silly audit   'on-finished': [ '2.4.1' ],
+152 silly audit   once: [ '1.4.0' ],
+152 silly audit   parseurl: [ '1.3.3' ],
+152 silly audit   'path-to-regexp': [ '8.4.2' ],
+152 silly audit   'proxy-addr': [ '2.0.7' ],
+152 silly audit   qs: [ '6.15.0' ],
+152 silly audit   'range-parser': [ '1.2.1' ],
+152 silly audit   'raw-body': [ '3.0.2' ],
+152 silly audit   router: [ '2.2.0' ],
+152 silly audit   'safer-buffer': [ '2.1.2' ],
+152 silly audit   send: [ '1.2.1' ],
+152 silly audit   'serve-static': [ '2.2.1' ],
+152 silly audit   setprototypeof: [ '1.2.0' ],
+152 silly audit   'side-channel': [ '1.1.0' ],
+152 silly audit   'side-channel-list': [ '1.0.0' ],
+152 silly audit   'side-channel-map': [ '1.0.1' ],
+152 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+152 silly audit   'socket.io-adapter': [ '2.5.6' ],
+152 silly audit   'socket.io-parser': [ '4.2.6' ],
+152 silly audit   statuses: [ '2.0.2' ],
+152 silly audit   toidentifier: [ '1.0.1' ],
+152 silly audit   'type-is': [ '2.0.1', '1.6.18' ],
+152 silly audit   'undici-types': [ '7.18.2' ],
+152 silly audit   unpipe: [ '1.0.0' ],
+152 silly audit   vary: [ '1.1.2' ],
+152 silly audit   wrappy: [ '1.0.2' ],
+152 silly audit   ws: [ '8.18.3' ],
+152 silly audit   bcryptjs: [ '3.0.3' ],
+152 silly audit   express: [ '5.2.1' ],
+152 silly audit   multer: [ '2.1.1' ],
+152 silly audit   nedb: [ '1.8.0' ],
+152 silly audit   'socket.io': [ '4.8.3' ],
+152 silly audit   'append-field': [ '1.0.0' ],
+152 silly audit   busboy: [ '1.6.0' ],
+152 silly audit   'concat-stream': [ '2.0.0' ],
+152 silly audit   streamsearch: [ '1.1.0' ],
+152 silly audit   'buffer-from': [ '1.1.2' ],
+152 silly audit   'readable-stream': [ '3.6.2' ],
+152 silly audit   typedarray: [ '0.0.6' ],
+152 silly audit   async: [ '0.2.10' ],
+152 silly audit   'binary-search-tree': [ '0.2.5' ],
+152 silly audit   localforage: [ '1.10.0' ],
+152 silly audit   mkdirp: [ '0.5.6' ],
+152 silly audit   underscore: [ '1.4.4' ],
+152 silly audit   lie: [ '3.1.1' ],
+152 silly audit   immediate: [ '3.0.6' ],
+152 silly audit   minimist: [ '1.2.8' ],
+152 silly audit   string_decoder: [ '1.3.0' ],
+152 silly audit   'util-deprecate': [ '1.0.2' ],
+152 silly audit   'safe-buffer': [ '5.2.1' ]
+152 silly audit }
+153 http cache safe-buffer@https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz 0ms (cache hit)
+154 http cache util-deprecate@https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz 0ms (cache hit)
+155 http cache string_decoder@https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz 0ms (cache hit)
+156 http cache minimist@https://registry.npmjs.org/minimist/-/minimist-1.2.8.tgz 0ms (cache hit)
+157 http cache immediate@https://registry.npmjs.org/immediate/-/immediate-3.0.6.tgz 0ms (cache hit)
+158 http cache lie@https://registry.npmjs.org/lie/-/lie-3.1.1.tgz 0ms (cache hit)
+159 http cache underscore@https://registry.npmjs.org/underscore/-/underscore-1.4.4.tgz 0ms (cache hit)
+160 http cache mkdirp@https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.6.tgz 0ms (cache hit)
+161 http cache localforage@https://registry.npmjs.org/localforage/-/localforage-1.10.0.tgz 0ms (cache hit)
+162 http cache binary-search-tree@https://registry.npmjs.org/binary-search-tree/-/binary-search-tree-0.2.5.tgz 0ms (cache hit)
+163 http cache async@https://registry.npmjs.org/async/-/async-0.2.10.tgz 0ms (cache hit)
+164 http cache typedarray@https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz 0ms (cache hit)
+165 http cache readable-stream@https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.2.tgz 0ms (cache hit)
+166 http cache buffer-from@https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz 0ms (cache hit)
+167 http cache streamsearch@https://registry.npmjs.org/streamsearch/-/streamsearch-1.1.0.tgz 0ms (cache hit)
+168 http cache concat-stream@https://registry.npmjs.org/concat-stream/-/concat-stream-2.0.0.tgz 0ms (cache hit)
+169 http cache busboy@https://registry.npmjs.org/busboy/-/busboy-1.6.0.tgz 0ms (cache hit)
+170 http cache append-field@https://registry.npmjs.org/append-field/-/append-field-1.0.0.tgz 0ms (cache hit)
+171 http cache nedb@https://registry.npmjs.org/nedb/-/nedb-1.8.0.tgz 0ms (cache hit)
+172 http cache multer@https://registry.npmjs.org/multer/-/multer-2.1.1.tgz 0ms (cache hit)
+173 http cache mime-db@https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz 0ms (cache hit)
+174 http cache mime-types@https://registry.npmjs.org/mime-types/-/mime-types-2.1.35.tgz 0ms (cache hit)
+175 http cache media-typer@https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz 0ms (cache hit)
+176 http cache type-is@https://registry.npmjs.org/type-is/-/type-is-1.6.18.tgz 0ms (cache hit)
+177 silly tarball no local data for lie@https://registry.npmjs.org/lie/-/lie-3.1.1.tgz. Extracting by manifest.
+178 silly tarball no local data for localforage@https://registry.npmjs.org/localforage/-/localforage-1.10.0.tgz. Extracting by manifest.
+179 silly tarball no local data for mkdirp@https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.6.tgz. Extracting by manifest.
+180 silly tarball no local data for underscore@https://registry.npmjs.org/underscore/-/underscore-1.4.4.tgz. Extracting by manifest.
+181 silly tarball no local data for binary-search-tree@https://registry.npmjs.org/binary-search-tree/-/binary-search-tree-0.2.5.tgz. Extracting by manifest.
+182 silly tarball no local data for immediate@https://registry.npmjs.org/immediate/-/immediate-3.0.6.tgz. Extracting by manifest.
+183 silly tarball no local data for async@https://registry.npmjs.org/async/-/async-0.2.10.tgz. Extracting by manifest.
+184 silly tarball no local data for nedb@https://registry.npmjs.org/nedb/-/nedb-1.8.0.tgz. Extracting by manifest.
+185 http fetch GET 200 https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.6.tgz 166ms (cache miss)
+186 http fetch GET 200 https://registry.npmjs.org/immediate/-/immediate-3.0.6.tgz 174ms (cache miss)
+187 http fetch GET 200 https://registry.npmjs.org/lie/-/lie-3.1.1.tgz 181ms (cache miss)
+188 http fetch GET 200 https://registry.npmjs.org/underscore/-/underscore-1.4.4.tgz 231ms (cache miss)
+189 http fetch GET 200 https://registry.npmjs.org/binary-search-tree/-/binary-search-tree-0.2.5.tgz 287ms (cache miss)
+190 http fetch GET 200 https://registry.npmjs.org/localforage/-/localforage-1.10.0.tgz 298ms (cache miss)
+191 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 337ms
+192 silly audit report {
+192 silly audit report   nedb: [
+192 silly audit report     {
+192 silly audit report       id: 1093031,
+192 silly audit report       url: 'https://github.com/advisories/GHSA-339j-hqgx-qrrx',
+192 silly audit report       title: 'Prototype Pollution in nedb',
+192 silly audit report       severity: 'high',
+192 silly audit report       vulnerable_versions: '<=1.8.0',
+192 silly audit report       cwe: [Array],
+192 silly audit report       cvss: [Object]
+192 silly audit report     }
+192 silly audit report   ],
+192 silly audit report   underscore: [
+192 silly audit report     {
+192 silly audit report       id: 1109570,
+192 silly audit report       url: 'https://github.com/advisories/GHSA-cf4h-3jhx-xvhq',
+192 silly audit report       title: 'Arbitrary Code Execution in underscore',
+192 silly audit report       severity: 'critical',
+192 silly audit report       vulnerable_versions: '>=1.3.2 <1.12.1',
+192 silly audit report       cwe: [Array],
+192 silly audit report       cvss: [Object]
+192 silly audit report     },
+192 silly audit report     {
+192 silly audit report       id: 1113950,
+192 silly audit report       url: 'https://github.com/advisories/GHSA-qpx9-hpmf-5gmw',
+192 silly audit report       title: 'Underscore has unlimited recursion in _.flatten and _.isEqual, potential for DoS attack',
+192 silly audit report       severity: 'high',
+192 silly audit report       vulnerable_versions: '<=1.13.7',
+192 silly audit report       cwe: [Array],
+192 silly audit report       cvss: [Object]
+192 silly audit report     }
+192 silly audit report   ]
+192 silly audit report }
+193 silly packumentCache corgi:https://registry.npmjs.org/nedb cache-miss
+194 silly packumentCache corgi:https://registry.npmjs.org/underscore cache-miss
+195 http fetch GET 200 https://registry.npmjs.org/underscore 200ms (cache miss)
+196 silly packumentCache corgi:https://registry.npmjs.org/underscore set size:undefined disposed:false
+197 http fetch GET 200 https://registry.npmjs.org/async/-/async-0.2.10.tgz 633ms (cache miss)
+198 http fetch GET 200 https://registry.npmjs.org/nedb/-/nedb-1.8.0.tgz 862ms (cache miss)
+199 http fetch GET 200 https://registry.npmjs.org/nedb 667ms (cache miss)
+200 silly packumentCache corgi:https://registry.npmjs.org/nedb set size:undefined disposed:false
+201 silly packumentCache corgi:https://registry.npmjs.org/binary-search-tree cache-miss
+202 http fetch GET 200 https://registry.npmjs.org/binary-search-tree 738ms (cache miss)
+203 silly packumentCache corgi:https://registry.npmjs.org/binary-search-tree set size:undefined disposed:false
+204 silly ADD node_modules/safe-buffer
+205 silly ADD node_modules/util-deprecate
+206 silly ADD node_modules/string_decoder
+207 silly ADD node_modules/minimist
+208 silly ADD node_modules/immediate
+209 silly ADD node_modules/lie
+210 silly ADD node_modules/underscore
+211 silly ADD node_modules/mkdirp
+212 silly ADD node_modules/localforage
+213 silly ADD node_modules/binary-search-tree
+214 silly ADD node_modules/async
+215 silly ADD node_modules/typedarray
+216 silly ADD node_modules/readable-stream
+217 silly ADD node_modules/buffer-from
+218 silly ADD node_modules/streamsearch
+219 silly ADD node_modules/concat-stream
+220 silly ADD node_modules/busboy
+221 silly ADD node_modules/append-field
+222 silly ADD node_modules/nedb
+223 silly ADD node_modules/multer
+224 silly ADD node_modules/multer/node_modules/mime-db
+225 silly ADD node_modules/multer/node_modules/mime-types
+226 silly ADD node_modules/multer/node_modules/media-typer
+227 silly ADD node_modules/multer/node_modules/type-is
+228 verbose cwd /data/data/com.termux/files/home/kurd_chat
+229 verbose os Linux 6.1.115-android14-11-ga2521ca27699-ab13294383
+230 verbose node v25.8.2
+231 verbose npm  v11.12.1
+232 verbose exit 0
+233 info ok

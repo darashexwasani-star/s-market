@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DGT-1 | ENTERPRISE</title>
+    <style>
+        :root { --accent: #007AFF; --bg: #000000; --card: #1C1C1E; --text: #FFFFFF; }
+        * { box-sizing: border-box; font-family: -apple-system, sans-serif; }
+        body { margin: 0; background: var(--bg); color: var(--text); height: 100vh; overflow: hidden; }
+        
+        /* Premium Auth */
+        .auth-page { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; padding: 30px; }
+        .logo { width: 80px; height: 80px; background: var(--accent); border-radius: 22%; margin-bottom: 40px; box-shadow: 0 0 30px rgba(0,122,255,0.3); }
+        input { width: 100%; max-width: 320px; padding: 18px; margin: 10px; border-radius: 14px; border: 1px solid #333; background: var(--card); color: #fff; font-size: 16px; outline: none; }
+        .main-btn { width: 100%; max-width: 320px; padding: 18px; border-radius: 14px; border: none; background: var(--accent); color: #fff; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .main-btn:active { transform: scale(0.97); }
+
+        /* App Interface */
+        #app { display: none; height: 100vh; flex-direction: column; }
+        .nav-top { height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border-bottom: 0.5px solid #333; }
+        .scroll-area { flex: 1; overflow-y: auto; padding: 10px; }
+
+        /* Chat Item Style */
+        .friend-card { display: flex; align-items: center; padding: 15px; background: var(--card); margin-bottom: 10px; border-radius: 18px; cursor: pointer; transition: 0.2s; }
+        .avatar { width: 55px; height: 55px; border-radius: 50%; background: #333; margin-left: 15px; border: 2px solid var(--accent); overflow: hidden; }
+        .friend-info h4 { margin: 0; font-size: 17px; }
+        .friend-info p { margin: 5px 0 0; font-size: 13px; color: #8E8E93; }
+
+        /* Full Screen Chat */
+        #chat-view { position: fixed; inset: 0; background: var(--bg); z-index: 500; display: none; flex-direction: column; }
+        .chat-msgs { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .bubble { max-width: 75%; padding: 12px 16px; border-radius: 20px; font-size: 16px; line-height: 1.4; }
+        .bubble.me { align-self: flex-end; background: var(--accent); border-bottom-right-radius: 4px; }
+        .bubble.he { align-self: flex-start; background: var(--card); border-bottom-left-radius: 4px; }
+
+        .chat-input { padding: 20px; display: flex; gap: 10px; background: var(--card); border-top: 0.5px solid #333; }
+        .chat-input input { margin: 0; flex: 1; }
+    </style>
+</head>
+<body>
+
+    <div id="auth" class="auth-page">
+        <div class="logo"></div>
+        <h1 style="letter-spacing: -1px;">DGT-1 ENTERPRISE</h1>
+        <input id="u" placeholder="یوزەرنەیم">
+        <input id="p" type="password" placeholder="پاسۆرد">
+        <button class="main-btn" onclick="auth('reg')">دروستکردنی هەژمار</button>
+        <button onclick="auth('login')" style="background:none; border:none; color:var(--accent); margin-top:20px; cursor:pointer; font-weight:bold;">چوونە ژوورەوە</button>
+    </div>
+
+    <div id="app">
+        <div class="nav-top">
+            <div style="width:40px; height:40px; background:#333; border-radius:50%;"></div>
+            <h3 style="font-size:18px;">Chat</h3>
+            <div onclick="addF()" style="font-size:24px; cursor:pointer; color:var(--accent);">⊕</div>
+        </div>
+        <div id="friends" class="scroll-area"></div>
+        <div id="reqs" class="scroll-area" style="border-top:1px solid #222;"></div>
+    </div>
+
+    <div id="chat-view">
+        <div class="nav-top">
+            <div onclick="closeChat()">✕</div>
+            <h3 id="chat-title">Name</h3>
+            <div style="width:20px;"></div>
+        </div>
+        <div id="msgs" class="chat-msgs"></div>
+        <div class="chat-input">
+            <input id="mi" placeholder="نامەیەک بنووسە...">
+            <button class="main-btn" style="width:80px;" onclick="sendMsg()">ناردن</button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io(); let me = "", activeF = "";
+        function auth(type) {
+            me = u.value; socket.emit('auth', { u: u.value, p: p.value, type });
+        }
+        socket.on('auth_ok', d => { 
+            auth.style.display = 'none'; app.style.display = 'flex'; 
+            renderUI(d);
+        });
+        socket.on('msg', m => alert(m));
+        function addF() { let t = prompt("ناوی یوزەر:"); if(t) socket.emit('add_friend', t); }
+        function renderUI(d) {
+            friends.innerHTML = d.friends.map(f => `
+                <div class="friend-card" onclick="openChat('${f}')">
+                    <div class="avatar"></div>
+                    <div class="friend-info"><h4>${f}</h4><p>نامەیەک بنێرە...</p></div>
+                </div>
+            `).join('');
+            reqs.innerHTML = d.reqs.map(r => `
+                <div class="friend-card">
+                    <div class="friend-info"><h4>${r}</h4><p>داواکاری هاوڕێیەتی</p></div>
+                    <button class="main-btn" style="width:80px; margin-right:auto;" onclick="socket.emit('accept','${r}')">Accept</button>
+                </div>
+            `).join('');
+        }
+        socket.on('update', () => socket.emit('auth', { u: me, p: p.value, type: 'login' }));
+        function openChat(f) {
+            activeF = f; chat-title.innerText = f; chat-view.style.display = 'flex';
+            socket.emit('get_chat', f);
+        }
+        function closeChat() { chat-view.style.display = 'none'; activeF = ""; }
+        socket.on('chat_history', h => {
+            msgs.innerHTML = h.map(m => `<div class="bubble ${m.f === me ? 'me' : 'he'}">${m.t}</div>`).join('');
+            msgs.scrollTop = msgs.scrollHeight;
+        });
+        function sendMsg() {
+            if(mi.value) { socket.emit('p_msg', { to: activeF, txt: mi.value }); mi.value = ""; }
+        }
+        socket.on('rx_msg', m => { if(activeF === m.f || activeF === m.t) socket.emit('get_chat', activeF); });
+    </script>
+</body>
+</html>

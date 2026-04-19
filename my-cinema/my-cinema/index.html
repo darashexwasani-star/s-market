@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>سینەمای مۆبایل</title>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+        :root {
+            --royal: #1a0b2e;
+            --gold: #d4af37;
+            --dark: #05010a;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background: var(--dark); color: white;
+            font-family: sans-serif; overflow: hidden;
+        }
+
+        /* شاشەی چوونە ژوورەوە */
+        #login {
+            position: fixed; inset: 0; background: var(--royal);
+            z-index: 100; display: flex; align-items: center; justify-content: center;
+        }
+
+        .login-card {
+            width: 85%; text-align: center; background: rgba(255,255,255,0.05);
+            padding: 30px; border-radius: 20px; border: 1px solid var(--gold);
+        }
+
+        /* ڕووکاری سەرەکی مۆبایل */
+        .app-container {
+            display: none; flex-direction: column; height: 100vh;
+        }
+
+        .video-box {
+            width: 100%; aspect-ratio: 16/9; background: #000;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .content-area {
+            flex: 1; display: flex; flex-direction: column; padding: 15px;
+            background: linear-gradient(to bottom, #1a0b2e, #05010a);
+        }
+
+        .url-bar {
+            display: flex; gap: 8px; margin-bottom: 15px;
+        }
+
+        input {
+            background: rgba(255,255,255,0.1); border: 1px solid var(--gold);
+            color: white; padding: 10px; border-radius: 8px; outline: none; flex: 1;
+        }
+
+        /* چاتەکە تەنها ٣ دێڕ */
+        .chat-view {
+            flex: 1; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end;
+        }
+
+        .msg {
+            background: rgba(212, 175, 55, 0.1); padding: 8px 12px;
+            margin-top: 8px; border-radius: 10px; border-right: 3px solid var(--gold);
+            font-size: 14px; animation: slideIn 0.3s ease;
+        }
+
+        .msg b { color: var(--gold); font-size: 11px; display: block; }
+
+        .btn {
+            background: var(--gold); color: black; border: none;
+            padding: 10px 15px; border-radius: 8px; font-weight: bold;
+        }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div id="login">
+    <div class="login-card">
+        <h2 style="color:var(--gold)">بەخێربێیت</h2>
+        <input type="text" id="user-in" placeholder="ناوەکەت بنووسە..." style="width:100%; text-align:center;"><br><br>
+        <button class="btn" style="width:100%" onclick="goIn()">چوونە ژوورەوە</button>
+    </div>
+</div>
+
+<div class="app-container" id="main-app">
+    <div class="video-box">
+        <div id="player"></div>
+    </div>
+
+    <div class="content-area">
+        <div class="url-bar">
+            <input type="text" id="yt-url" placeholder="لینکی یوتیوب...">
+            <button class="btn" onclick="loadVid()">لێدان</button>
+        </div>
+
+        <div class="chat-view" id="chat-box">
+            </div>
+
+        <div class="url-bar" style="margin-top:15px; margin-bottom:0;">
+            <input type="text" id="chat-in" placeholder="نامەیەک بنووسە...">
+            <button class="btn" onclick="send()">ناردن</button>
+        </div>
+        <button onclick="sync()" style="background:none; border:none; color:var(--gold); font-size:12px; margin-top:5px;">Sync Time</button>
+    </div>
+</div>
+
+<script>
+    let player, myName = "";
+
+    function goIn() {
+        const val = document.getElementById('user-in').value;
+        if(val.trim()) {
+            myName = val;
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('main-app').style.display = 'flex';
+        }
+    }
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '100%', width: '100%', videoId: 'm_UeX807YhE',
+            playerVars: { 'controls': 1, 'rel': 0, 'playsinline': 1 }
+        });
+    }
+
+    function loadVid() {
+        const url = document.getElementById('yt-url').value;
+        const id = url.match(/(?:youtu\.be\/|youtube\.com\/(?:v\/|u\/\w\/|embed\/|watch\?v=))([^#\&\?]{11})/);
+        if(id) player.loadVideoById(id[1]);
+    }
+
+    function send() {
+        const inpt = document.getElementById('chat-in');
+        const box = document.getElementById('chat-box');
+        if(inpt.value.trim()) {
+            const div = document.createElement('div');
+            div.className = 'msg';
+            div.innerHTML = `<b>${myName}</b>${inpt.value}`;
+            box.appendChild(div);
+            
+            // هێشتنەوەی تەنها ٣ نامەی کۆتایی
+            if(box.children.length > 3) box.removeChild(box.firstChild);
+            
+            inpt.value = "";
+        }
+    }
+
+    function sync() {
+        alert("کاتی ئێستا: " + Math.floor(player.getCurrentTime()) + " چرکە");
+    }
+
+    document.getElementById("chat-in").addEventListener("keypress", (e) => { if(e.key === "Enter") send(); });
+</script>
+
+</body>
+</html>

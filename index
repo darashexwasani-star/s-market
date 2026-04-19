@@ -1,0 +1,109 @@
+// =============================== // 🚀 DGT-1 PRO VERSION (FULL STACK) // Frontend + Backend (Node.js + Express + JWT + MongoDB) // ===============================
+
+// ----------- BACKEND (server.js) -----------
+
+const express = require('express'); const mongoose = require('mongoose'); const bcrypt = require('bcryptjs'); const jwt = require('jsonwebtoken'); const cors = require('cors');
+
+const app = express(); app.use(express.json()); app.use(cors());
+
+// 🔐 CONFIG const JWT_SECRET = "SUPER_SECRET_KEY";
+
+// 🔗 DB CONNECTION mongoose.connect('mongodb://127.0.0.1:27017/dgt1', { useNewUrlParser: true, useUnifiedTopology: true });
+
+// 👤 USER MODEL const UserSchema = new mongoose.Schema({ email: String, password: String }); const User = mongoose.model('User', UserSchema);
+
+// 📦 TRANSACTION MODEL const TransactionSchema = new mongoose.Schema({ title: String, amount: Number, status: String, userId: String }); const Transaction = mongoose.model('Transaction', TransactionSchema);
+
+// 📝 REGISTER app.post('/register', async (req, res) => { const { email, password } = req.body; const hashed = await bcrypt.hash(password, 10); const user = await User.create({ email, password: hashed }); res.json(user); });
+
+// 🔑 LOGIN app.post('/login', async (req, res) => { const { email, password } = req.body; const user = await User.findOne({ email }); if (!user) return res.status(400).send("User not found");
+
+const isMatch = await bcrypt.compare(password, user.password); if (!isMatch) return res.status(400).send("Wrong password");
+
+const token = jwt.sign({ id: user._id }, JWT_SECRET); res.json({ token }); });
+
+// 🔐 MIDDLEWARE function auth(req, res, next) { const token = req.headers['authorization']; if (!token) return res.status(401).send("No token");
+
+try { const decoded = jwt.verify(token, JWT_SECRET); req.user = decoded; next(); } catch { res.status(401).send("Invalid token"); } }
+
+// ➕ CREATE TRANSACTION app.post('/transactions', auth, async (req, res) => { const t = await Transaction.create({ ...req.body, userId: req.user.id }); res.json(t); });
+
+// 📄 GET TRANSACTIONS app.get('/transactions', auth, async (req, res) => { const list = await Transaction.find({ userId: req.user.id }); res.json(list); });
+
+app.listen(5000, () => console.log("🚀 Server running on port 5000"));
+
+// ----------- FRONTEND (index.html) -----------
+
+/*
+
+<!DOCTYPE html><html lang="ku" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>DGT-1 PRO</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6"><div id="app">
+  <div id="login">
+    <input id="email" placeholder="Email" class="border p-2" />
+    <input id="password" type="password" placeholder="Password" class="border p-2" />
+    <button onclick="login()" class="bg-blue-600 text-white p-2">Login</button>
+  </div>  <div id="dashboard" class="hidden">
+    <h1 class="text-xl">Dashboard</h1>
+    <input id="title" placeholder="Title" class="border p-2" />
+    <input id="amount" placeholder="Amount" class="border p-2" />
+    <button onclick="createTransaction()" class="bg-green-600 text-white p-2">Add</button>
+    <ul id="list"></ul>
+  </div>
+</div><script>
+let token = "";
+
+async function login() {
+  const res = await fetch('http://localhost:5000/login', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      email: email.value,
+      password: password.value
+    })
+  });
+
+  const data = await res.json();
+  token = data.token;
+
+  document.getElementById('login').classList.add('hidden');
+  document.getElementById('dashboard').classList.remove('hidden');
+
+  loadTransactions();
+}
+
+async function createTransaction() {
+  await fetch('http://localhost:5000/transactions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    },
+    body: JSON.stringify({
+      title: title.value,
+      amount: amount.value,
+      status: 'pending'
+    })
+  });
+
+  loadTransactions();
+}
+
+async function loadTransactions() {
+  const res = await fetch('http://localhost:5000/transactions', {
+    headers: { 'Authorization': token }
+  });
+
+  const data = await res.json();
+
+  list.innerHTML = data.map(t =>
+    `<li>${t.title} - $${t.amount} (${t.status})</li>`
+  ).join('');
+}
+</script></body>
+</html>
+*/

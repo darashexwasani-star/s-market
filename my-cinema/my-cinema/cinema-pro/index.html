@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cinema Room</title>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+        body { margin: 0; background: #2a0040; color: white; font-family: Tahoma, sans-serif; overflow: hidden; }
+        
+        /* Login Screen */
+        #login-screen { position: fixed; inset: 0; background: #2a0040; z-index: 999; display: flex; align-items: center; justify-content: center; }
+        .login-box { background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #d4af37; width: 80%; }
+        
+        /* Main Layout */
+        .container { display: none; flex-direction: column; height: 100vh; }
+        
+        /* Video Area (Purple Top) */
+        .top-section { background: #2a0040; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .url-input { width: 90%; background: rgba(255,255,255,0.1); border: 1px solid #d4af37; color: white; padding: 12px; border-radius: 25px; text-align: center; outline: none; }
+        .video-container { width: 95%; aspect-ratio: 16/9; background: #666; border-radius: 25px; overflow: hidden; position: relative; border: 1px solid #555; }
+
+        /* Chat Area (Grey Bottom) */
+        .bottom-section { flex: 1; background: #666; padding: 15px; display: flex; flex-direction: column; }
+        #chat-messages { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+        
+        /* Chat Message Style based on Image */
+        .msg-row { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+        .msg-text { background: white; color: #800080; padding: 8px 20px; border-radius: 5px; font-weight: bold; flex: 1; text-align: center; }
+        .user-info { display: flex; flex-direction: column; align-items: center; min-width: 60px; }
+        .avatar { width: 40px; height: 40px; background: white; border-radius: 50%; }
+        .name-label { font-size: 14px; font-weight: bold; margin-top: 2px; }
+
+        .input-area { display: flex; gap: 10px; margin-top: 10px; }
+        .input-field { flex: 1; padding: 10px; border-radius: 5px; border: none; outline: none; }
+        .send-btn { background: #2a0040; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div id="login-screen">
+    <div class="login-box">
+        <h2 style="color:#d4af37">بەخێربێیت دارا گیان</h2>
+        <input type="text" id="uname" placeholder="ناوەکەت بنووسە..." style="width:100%; padding:12px; border-radius:10px; border:none;"><br><br>
+        <button onclick="enter()" style="width:100%; padding:12px; background:#d4af37; border:none; border-radius:10px; font-weight:bold;">داخڵبوون</button>
+    </div>
+</div>
+
+<div class="container" id="main-ui">
+    <div class="top-section">
+        <input type="text" id="vid-url" class="url-input" placeholder="لینکی ڤیدیۆ لێرە دابنێ...">
+        <div class="video-container">
+            <div id="player"></div>
+        </div>
+        <button onclick="loadVideo()" style="background:none; border:1px solid #d4af37; color:white; padding:5px 15px; border-radius:15px;">لێدان</button>
+    </div>
+
+    <div class="bottom-section">
+        <div id="chat-messages">
+            </div>
+        <div class="input-area">
+            <input type="text" id="msg-in" class="input-field" placeholder="نامەیەک بنووسە...">
+            <button class="send-btn" onclick="send()">ناردن</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let player, myName = "";
+
+    function enter() {
+        const n = document.getElementById('uname').value;
+        if(n.trim()) {
+            myName = n;
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('main-ui').style.display = 'flex';
+        }
+    }
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '100%', width: '100%', videoId: 'm_UeX807YhE',
+            playerVars: { 'playsinline': 1, 'controls': 1 }
+        });
+    }
+
+    function loadVideo() {
+        const url = document.getElementById('vid-url').value;
+        const id = url.match(/(?:youtu\.be\/|youtube\.com\/(?:v\/|u\/\w\/|embed\/|watch\?v=))([^#\&\?]{11})/);
+        if(id) player.loadVideoById(id[1]);
+    }
+
+    function send() {
+        const inpt = document.getElementById('msg-in');
+        const box = document.getElementById('chat-messages');
+        if(inpt.value.trim()) {
+            box.innerHTML += `
+                <div class="msg-row">
+                    <div class="msg-text">${inpt.value}</div>
+                    <div class="user-info">
+                        <div class="avatar"></div>
+                        <span class="name-label">${myName}</span>
+                    </div>
+                </div>`;
+            inpt.value = "";
+            box.scrollTop = box.scrollHeight;
+        }
+    }
+</script>
+</body>
+</html>
